@@ -8,7 +8,7 @@ const Item = ({item}) => {
 
     const navigate = useNavigate()
     
-return(
+    return(
     <div>
         {/* Card de Bootstrap. Inserto las propiedades de los objetos de mi array de productos como props.  */}
         <Card style={{ width: '18rem', color:'black'}} onClick={()=> navigate(`/product/${item.id}`)}>

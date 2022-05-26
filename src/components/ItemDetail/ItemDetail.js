@@ -2,11 +2,15 @@ import React from "react"
 import {Card} from "react-bootstrap"
 import ItemCount from "../ItemCount/ItemCount"
 import { CartContext } from "../../context/CartContext"
+import { useNavigate } from 'react-router-dom'
+
 
 export default function ItemDetail ({item}) {
+
+  const navigate = useNavigate()
     
   // Definimos variables del context
-  const { addToCart, isInCart } = React.useContext(CartContext);
+  const { addToCart, isInCart, removeFromCart } = React.useContext(CartContext);
   // Separamos el estado del count
   const [count, setCount] = React.useState(1)
   
@@ -20,7 +24,7 @@ export default function ItemDetail ({item}) {
         </Card.Text>
         <h3>$ {item.price}</h3>
         {isInCart(item.id) ? (
-          <button>Ir al carrito</button>
+          <button onClick={()=> navigate(`/cart`)}>Ir al carrito</button>
         ) : (
           <ItemCount
             onSubmit={() => addToCart(item, count)}
@@ -29,6 +33,8 @@ export default function ItemDetail ({item}) {
             stock={item.stock}
           />
         )}
+        {/* Agrego un botón de quitar aquí para ver cómo funciona */}
+        {isInCart(item.id) ? <button onClick={()=> removeFromCart(item.id)}>Eliminar</button>: ''}
       </Card.Body>
     </Card>
   );

@@ -1,8 +1,10 @@
 import React from "react"
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 import { CartContext } from "../../context/CartContext";
 
 export default function CartIcon () {
+    const navigate = useNavigate()
+
     const iconStyle = {
         color: "black",
     }
@@ -10,9 +12,8 @@ export default function CartIcon () {
     const { cart } = React.useContext(CartContext);
     return (
         <div>
-            <Link to="/cart"></Link>
             {/* Imagen en carpeta "images", dentro de "public". */}
-            <img src="/images/basket_icon.png" alt="Basket widget" />
+            <img src="/images/basket_icon.png" alt="Basket widget" onClick={()=> navigate(`/cart`)}/>
             <span className={iconStyle}>{cart.lenght}</span>    
         </div>
     );
